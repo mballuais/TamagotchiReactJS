@@ -45,7 +45,7 @@ const App = () => {
       <ProgressBar progress={progress} />
 
       {/* Image évolutive */}
-      <EvolutionImage progress={progress} />
+      <EvolutionImage progress={progress} /> 
 
       {/* Bouton pour augmenter la progression */}
       <button onClick={increaseProgress} style={{ marginTop: '10px' }}>
@@ -55,5 +55,6 @@ const App = () => {
     </div>
   );
 }
+};
 
 export default App;
