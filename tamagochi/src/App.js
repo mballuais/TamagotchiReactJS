@@ -28,7 +28,7 @@ const App = () => {
       {/* Barre de progression */}
       <ProgressBar progress={progress} />
 
-      {/* Image évolutive */}
+      {/* Image évolutive avec chance de shiny */}
       <EvolutionImage progress={progress} />
 
       {/* Bouton pour augmenter la progression */}
