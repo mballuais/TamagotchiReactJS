@@ -22,6 +22,21 @@ const App = () => {
 
 
   
+const App = () => {
+  const [progress, setProgress] = useState(0);
+
+
+  // const handleClick = () => {
+  //   setCount(count + 1);
+  // };
+
+  const increaseProgress = () => {
+    setProgress(prevProgress => Math.min(prevProgress + 10, 100)); // Incrémente de 10% sans dépasser 100%
+  };
+
+
+
+  
   return (
     <div style={{ padding: '20px' }}>
       <h1>Tamagotchi Progression</h1>
