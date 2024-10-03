@@ -1,9 +1,11 @@
+// src/components/atoms/Button.js
 import React from 'react';
 
-const Button = ({ onClick, label }) => {
+const Button = ({ onClick, disabled, children, variant }) => {
+  const className = `nes-btn ${variant ? `is-${variant}` : ''}`;
   return (
-    <button onClick={onClick}>
-      {label}
+    <button onClick={onClick} disabled={disabled} className={className}>
+      {children}
     </button>
   );
 };

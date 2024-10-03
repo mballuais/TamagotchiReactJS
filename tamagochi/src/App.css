@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+/* src/styles.css */
+
+/* Centrer le contenu principal */
+body {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style du conteneur principal */
+#root {
+  width: 800px; /* Vous pouvez ajuster la largeur selon vos besoins */
+  margin-top: 20px;
+}
+
+/* Pour s'assurer que le conteneur principal a une marge */
+.nes-container.main-container {
+  margin: 20px;
+}
+
+/* Ajuster le style des images */
+.nes-container.is-rounded img {
+  width: 200px; /* Ajustez la taille de l'image selon vos préférences */
+  height: auto;
+}
