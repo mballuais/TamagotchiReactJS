@@ -6,6 +6,7 @@ const ActionButtons = ({
   feedTamagotchi,
   playWithTamagotchi,
   restTamagotchi,
+  resetTamagotchi, // Ajoutez ceci
   isAlive,
 }) => {
   return (
@@ -20,6 +21,10 @@ const ActionButtons = ({
         </Button>
         <Button onClick={restTamagotchi} disabled={!isAlive} variant="warning">
           Dormir
+        </Button>
+        {/* Bouton Reset */}
+        <Button onClick={resetTamagotchi} variant="error">
+          Reset
         </Button>
       </div>
     </div>

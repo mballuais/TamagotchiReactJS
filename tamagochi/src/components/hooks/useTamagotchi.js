@@ -2,25 +2,42 @@
 import { useState, useEffect } from 'react';
 
 const useTamagotchi = () => {
-  // États existants
-  const [hunger, setHunger] = useState(50);
-  const [happiness, setHappiness] = useState(50);
-  const [energy, setEnergy] = useState(50);
-  const [isAlive, setIsAlive] = useState(true);
+  // États initiaux
+  const initialHunger = 50;
+  const initialHappiness = 50;
+  const initialEnergy = 50;
+  const initialAge = 0;
+  const initialMissions = { played: false, fed: false, rested: false };
 
-  // Nouvel état pour l'âge (progression)
-  const [age, setAge] = useState(() => {
-    const storedAge = localStorage.getItem('tamagotchiAge');
-    return storedAge ? parseInt(storedAge, 10) : 0;
+  // États
+  const [hunger, setHunger] = useState(() => {
+    const storedHunger = localStorage.getItem('hunger');
+    return storedHunger ? parseInt(storedHunger, 10) : initialHunger;
   });
 
-  // États pour les missions quotidiennes
+  const [happiness, setHappiness] = useState(() => {
+    const storedHappiness = localStorage.getItem('happiness');
+    return storedHappiness ? parseInt(storedHappiness, 10) : initialHappiness;
+  });
+
+  const [energy, setEnergy] = useState(() => {
+    const storedEnergy = localStorage.getItem('energy');
+    return storedEnergy ? parseInt(storedEnergy, 10) : initialEnergy;
+  });
+
+  const [age, setAge] = useState(() => {
+    const storedAge = localStorage.getItem('tamagotchiAge');
+    return storedAge ? parseInt(storedAge, 10) : initialAge;
+  });
+
   const [missions, setMissions] = useState(() => {
     const storedMissions = localStorage.getItem('missions');
     return storedMissions
       ? JSON.parse(storedMissions)
-      : { played: false, fed: false, rested: false };
+      : initialMissions;
   });
+
+  const [isAlive, setIsAlive] = useState(true);
 
   // Pour les tests, définir IS_TEST_MODE à true
   const IS_TEST_MODE = true;
@@ -50,11 +67,14 @@ const useTamagotchi = () => {
     }
   }, [IS_TEST_MODE]);
 
-  // Sauvegarder les missions et l'âge dans le localStorage à chaque changement
+  // Sauvegarder les états dans le localStorage
   useEffect(() => {
-    localStorage.setItem('missions', JSON.stringify(missions));
+    localStorage.setItem('hunger', hunger);
+    localStorage.setItem('happiness', happiness);
+    localStorage.setItem('energy', energy);
     localStorage.setItem('tamagotchiAge', age);
-  }, [missions, age]);
+    localStorage.setItem('missions', JSON.stringify(missions));
+  }, [hunger, happiness, energy, age, missions]);
 
   // Vérifier si toutes les missions sont accomplies pour augmenter l'âge
   useEffect(() => {
@@ -62,45 +82,81 @@ const useTamagotchi = () => {
       const ageIncreased = localStorage.getItem('ageIncreased');
 
       if (!ageIncreased) {
-        setAge((prevAge) => Math.min(prevAge + 15, 100)); // Limiter l'âge à 100%
+        setAge((prevAge) => Math.min(prevAge + 15, 100));
         localStorage.setItem('ageIncreased', 'true');
       }
     }
   }, [missions]);
 
+  // Vérifier si le Tamagotchi est en vie
+  useEffect(() => {
+    if (hunger <= 0 || happiness <= 0 || energy <= 0) {
+      setIsAlive(false);
+    }
+  }, [hunger, happiness, energy]);
+
   // Actions pour les missions
   const feedTamagotchi = () => {
     if (!isAlive) return;
 
-    // Votre logique existante pour nourrir le Tamagotchi
     setHunger((prevHunger) => Math.min(prevHunger + 10, 100));
 
-    // Marquer la mission comme accomplie
     setMissions((prevMissions) => ({ ...prevMissions, fed: true }));
   };
 
   const playWithTamagotchi = () => {
     if (!isAlive) return;
 
-    // Votre logique existante pour jouer avec le Tamagotchi
     setHappiness((prevHappiness) => Math.min(prevHappiness + 10, 100));
 
-    // Marquer la mission comme accomplie
     setMissions((prevMissions) => ({ ...prevMissions, played: true }));
   };
 
   const restTamagotchi = () => {
     if (!isAlive) return;
 
-    // Votre logique existante pour reposer le Tamagotchi
     setEnergy((prevEnergy) => Math.min(prevEnergy + 10, 100));
 
-    // Marquer la mission comme accomplie
     setMissions((prevMissions) => ({ ...prevMissions, rested: true }));
   };
 
-  // Votre logique existante pour diminuer les valeurs, etc.
-  // ...
+  // Diminuer les valeurs au fil du temps
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isAlive) {
+        clearInterval(interval);
+        return;
+      }
+
+      setHunger((prev) => Math.max(prev - 5, 0));
+      setHappiness((prev) => Math.max(prev - 5, 0));
+      setEnergy((prev) => Math.max(prev - 5, 0));
+    }, 8000); // Toutes les 8 secondes
+
+    return () => clearInterval(interval);
+  }, [isAlive]);
+
+  // Fonction pour réinitialiser le Tamagotchi
+  const resetTamagotchi = () => {
+    // Réinitialiser les états
+    setHunger(initialHunger);
+    setHappiness(initialHappiness);
+    setEnergy(initialEnergy);
+    setAge(initialAge);
+    setMissions(initialMissions);
+    setIsAlive(true);
+
+    // Effacer le localStorage
+    localStorage.removeItem('hunger');
+    localStorage.removeItem('happiness');
+    localStorage.removeItem('energy');
+    localStorage.removeItem('tamagotchiAge');
+    localStorage.removeItem('missions');
+    localStorage.removeItem('ageIncreased');
+    localStorage.removeItem('isShiny');
+    localStorage.removeItem('lastResetDate');
+    localStorage.removeItem('ageIncreasedDate');
+  };
 
   return {
     hunger,
@@ -109,6 +165,7 @@ const useTamagotchi = () => {
     feedTamagotchi,
     playWithTamagotchi,
     restTamagotchi,
+    resetTamagotchi,
     isAlive,
     missions,
     age,

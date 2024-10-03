@@ -66,6 +66,7 @@ const TamagotchiPanel = (props) => {
           feedTamagotchi={props.feedTamagotchi}
           playWithTamagotchi={props.playWithTamagotchi}
           restTamagotchi={props.restTamagotchi}
+          resetTamagotchi={props.resetTamagotchi} 
           isAlive={props.isAlive}
         />
       </div>

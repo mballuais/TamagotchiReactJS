@@ -6,7 +6,6 @@ import WeatherComponent from './components/organisms/WeatherComponent';
 import 'nes.css/css/nes.min.css';
 import './App.css';
 
-
 const App = () => {
   const {
     hunger,
@@ -15,6 +14,7 @@ const App = () => {
     feedTamagotchi,
     playWithTamagotchi,
     restTamagotchi,
+    resetTamagotchi, // Importation de la fonction reset
     isAlive,
     missions,
     age,
@@ -30,12 +30,13 @@ const App = () => {
         feedTamagotchi={feedTamagotchi}
         playWithTamagotchi={playWithTamagotchi}
         restTamagotchi={restTamagotchi}
+        resetTamagotchi={resetTamagotchi} // Passage de la fonction reset en prop
         isAlive={isAlive}
         missions={missions}
         age={age}
       />
-    <h2>Météo</h2>
-    <WeatherComponent />
+      <h2>Météo</h2>
+      <WeatherComponent />
     </div>
   );
 };
