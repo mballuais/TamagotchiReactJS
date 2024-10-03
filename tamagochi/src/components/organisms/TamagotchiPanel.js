@@ -1,3 +1,4 @@
+
 // src/components/organisms/TamagotchiPanel.js
 import React, { useState } from 'react';
 import TamagotchiStatus from '../molecules/TamagotchiStatus';
