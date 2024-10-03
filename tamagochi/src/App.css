@@ -87,7 +87,7 @@ body.rain {
 }
 
 body.clouds {
-  background-image: url('./components/assets/background/sunset.jpg'); /* Nuageux */
+  background-image: url('./components/assets/background/cloud.png'); /* Nuageux */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
