@@ -9,7 +9,6 @@ export const fetchPokemonByType = createAsyncThunk('pokemon/fetchPokemonByType',
     }
 
     const response = await axios(config).then((res) => {
-        console.log("Response Got :", res)
         return res;
 
     }).catch((error) => {

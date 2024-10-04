@@ -6,7 +6,8 @@ import ActionButtons from '../molecules/ActionButtons';
 import TamagotchiMissions from '../molecules/TamagotchiMissions';
 import EvolutionImage from '../assets/EvolutionImage';
 import ProgressBar from '../atoms/ProgressBar';
-import PokeApi from '../molecules/PokeApi';
+import PokeApi from './PokeApi';
+import PokeFamilyHandler from '../molecules/PokeFamilyHandler';
 
 const TamagotchiPanel = (props) => {
   const [showMissions, setShowMissions] = useState(false);
@@ -44,7 +45,7 @@ const TamagotchiPanel = (props) => {
         {/* Image du Tamagotchi au centre */}
         <div className="nes-container is-rounded" style={{ padding: '20px' }}>
           {/* <EvolutionImage age={props.age} /> */}
-          <PokeApi></PokeApi>
+          <PokeFamilyHandler age={props.age}></PokeFamilyHandler>
         </div>
 
         {/* Bouton pour afficher les missions à droite */}

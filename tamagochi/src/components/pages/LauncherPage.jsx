@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import PokeApi from '../molecules/PokeApi';
+import PokeApi from '../organisms/PokeApi';
 import { getRandomItem } from '../../jinfunctions';
 import EggGenerator from './EggGenerator';
 
