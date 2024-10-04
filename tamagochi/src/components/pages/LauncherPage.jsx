@@ -1,17 +1,34 @@
 // src/components/pages/LauncherPage.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import PokeApi from '../molecules/PokeApi';
+import { getRandomItem } from '../../jinfunctions';
+import EggGenerator from './EggGenerator';
 
 const LauncherPage = () => {
   const navigate = useNavigate();
+  const [type, setType] = useState(null)
+  const [tamagotchiFound, setTamagotchiFound] = useState(false);
 
   const selectTamagotchi = (type) => {
     // Stocker le type de Tamagotchi sélectionné dans le localStorage
     localStorage.setItem('selectedTamagotchi', type);
+
+
+    // dispatch(fetchPokemonByType(type))
+
+    setType(type)
     // Rediriger vers la page du Tamagotchi
-    navigate('/home');
   };
 
+  useEffect(() => {
+    if (tamagotchiFound) {
+      navigate('/home');
+    }
+  }, [
+    tamagotchiFound
+  ])
   return (
     <div className="nes-container is-dark with-title" style={{ margin: '20px', textAlign: 'center' }}>
       <p className="title">Choisissez votre Tamagotchi</p>
@@ -32,8 +49,14 @@ const LauncherPage = () => {
           <p>Type Obscurité</p>
         </div>
       </div>
+      {type !== null ? <EggGenerator onComplete={() => { setTamagotchiFound(true) }} type={type}></EggGenerator> : <></>}
+
     </div>
   );
+
+
+
+
 };
 
 export default LauncherPage;
