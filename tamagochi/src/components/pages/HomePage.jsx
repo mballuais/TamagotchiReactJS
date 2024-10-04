@@ -38,7 +38,11 @@ const HomePage = () => {
         feedTamagotchi={feedTamagotchi}
         playWithTamagotchi={playWithTamagotchi}
         restTamagotchi={restTamagotchi}
-        resetTamagotchi={resetTamagotchi}
+        resetTamagotchi={() => {
+          navigate('/');
+          resetTamagotchi()
+
+        }}
         isAlive={isAlive}
         missions={missions}
         age={age}
