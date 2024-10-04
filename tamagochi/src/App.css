@@ -56,14 +56,6 @@ body {
   margin: 20px;
   background-color: rgba(255, 255, 255, 0.556);
 }
-p .title{
-  background-color: #000000;
-  font-size: 1000px;
-  color: red;
-}
-title{
-  color: red;
-}
 /* Ajuster le style des images */
 .nes-container.is-rounded img {
   width: 200px; /* Ajustez la taille de l'image selon vos préférences */
