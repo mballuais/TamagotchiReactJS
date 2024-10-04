@@ -1,43 +1,21 @@
 // src/App.js
 import React from 'react';
-import TamagotchiPanel from './components/organisms/TamagotchiPanel';
-import useTamagotchi from './components/hooks/useTamagotchi';
-import WeatherComponent from './components/organisms/WeatherComponent';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LauncherPage from './components/pages/LauncherPage';
+import HomePage from './components/pages/HomePage';
 import 'nes.css/css/nes.min.css';
 import './App.css';
 
 const App = () => {
-  const {
-    hunger,
-    happiness,
-    energy,
-    feedTamagotchi,
-    playWithTamagotchi,
-    restTamagotchi,
-    resetTamagotchi, // Importation de la fonction reset
-    isAlive,
-    missions,
-    age,
-  } = useTamagotchi();
-
   return (
-    <div className="nes-container is-white with-title main-container">
-      <p className="title">Tamagotchi</p>
-      <TamagotchiPanel
-        hunger={hunger}
-        happiness={happiness}
-        energy={energy}
-        feedTamagotchi={feedTamagotchi}
-        playWithTamagotchi={playWithTamagotchi}
-        restTamagotchi={restTamagotchi}
-        resetTamagotchi={resetTamagotchi} // Passage de la fonction reset en prop
-        isAlive={isAlive}
-        missions={missions}
-        age={age}
-      />
-      <h2>Météo</h2>
-      <WeatherComponent />
-    </div>
+    <Router>
+      <Routes>
+        {/* Route pour la page de lancement */}
+        <Route path="/" element={<LauncherPage />} />
+        {/* Route pour la page principale du Tamagotchi */}
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 };
 

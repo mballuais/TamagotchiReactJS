@@ -32,12 +32,19 @@ const useTamagotchi = () => {
 
   const [missions, setMissions] = useState(() => {
     const storedMissions = localStorage.getItem('missions');
-    return storedMissions
-      ? JSON.parse(storedMissions)
-      : initialMissions;
+    return storedMissions ? JSON.parse(storedMissions) : initialMissions;
   });
 
-  const [isAlive, setIsAlive] = useState(true);
+  const [isAlive, setIsAlive] = useState(() => {
+    const storedIsAlive = localStorage.getItem('isAlive');
+    return storedIsAlive !== null ? JSON.parse(storedIsAlive) : true;
+  });
+
+  // État pour le Tamagotchi sélectionné
+  const [selectedTamagotchi, setSelectedTamagotchi] = useState(() => {
+    const storedType = localStorage.getItem('selectedTamagotchi');
+    return storedType || 'water'; // Valeur par défaut si aucun n'est sélectionné
+  });
 
   // Pour les tests, définir IS_TEST_MODE à true
   const IS_TEST_MODE = true;
@@ -74,7 +81,8 @@ const useTamagotchi = () => {
     localStorage.setItem('energy', energy);
     localStorage.setItem('tamagotchiAge', age);
     localStorage.setItem('missions', JSON.stringify(missions));
-  }, [hunger, happiness, energy, age, missions]);
+    localStorage.setItem('isAlive', JSON.stringify(isAlive));
+  }, [hunger, happiness, energy, age, missions, isAlive]);
 
   // Vérifier si toutes les missions sont accomplies pour augmenter l'âge
   useEffect(() => {
@@ -156,6 +164,11 @@ const useTamagotchi = () => {
     localStorage.removeItem('isShiny');
     localStorage.removeItem('lastResetDate');
     localStorage.removeItem('ageIncreasedDate');
+    localStorage.removeItem('isAlive');
+    localStorage.removeItem('selectedTamagotchi');
+
+    // Redéfinir le Tamagotchi sélectionné
+    setSelectedTamagotchi('water'); // Ou rediriger l'utilisateur vers la page de sélection
   };
 
   return {
@@ -169,6 +182,7 @@ const useTamagotchi = () => {
     isAlive,
     missions,
     age,
+    selectedTamagotchi,
   };
 };
 
