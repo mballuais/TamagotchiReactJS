@@ -36,3 +36,59 @@
     transform: rotate(360deg);
   }
 }
+
+/* src/styles.css */
+
+/* Centrer le contenu principal */
+body {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style du conteneur principal */
+#root {
+  width: 800px; /* Vous pouvez ajuster la largeur selon vos besoins */
+  margin-top: 20px;
+}
+
+/* Pour s'assurer que le conteneur principal a une marge */
+.nes-container.main-container {
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.556);
+}
+/* Ajuster le style des images */
+.nes-container.is-rounded img {
+  width: 200px; /* Ajustez la taille de l'image selon vos préférences */
+  height: auto;
+}
+
+/* Appliquer le fond sur le body */
+body.clear {
+  background-image: url('./components/assets/background/sun.jpg'); /* Ciel clair */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+body.rain {
+  background-image: url('./components/assets/background/rain.png'); /* Pluie */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.clouds {
+  background-image: url('./components/assets/background/cloud.png'); /* Nuageux */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.night {
+  background-image: url('./components/assets/background/night.jpg'); /* Nuit */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+

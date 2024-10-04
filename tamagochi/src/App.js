@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LauncherPage from './components/pages/LauncherPage';
+import HomePage from './components/pages/HomePage';
+import 'nes.css/css/nes.min.css';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Route pour la page de lancement */}
+        <Route path="/" element={<LauncherPage />} />
+        {/* Route pour la page principale du Tamagotchi */}
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
